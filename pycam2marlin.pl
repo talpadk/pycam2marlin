@@ -2,6 +2,7 @@
 
 use strict;
 
+my $rapidSpeed = 1000;
 my $feedSpeed = undef;
 my $moveType = "G1";
 
@@ -20,7 +21,13 @@ sub outputMoveLine {
 	if (defined($feedSpeed)){
 	    $line = "$line $feedSpeed";
 	}
-    } 
+    }
+
+    #rapid (non interpolated) move 
+    if ($line =~ /^\s*G0[^F]*/){
+	$line = "$line F$rapidSpeed";
+    }
+
 
     print "$line\n";
 }
@@ -39,6 +46,10 @@ while (<STDIN>) {
     }
     #dual XY moves
     elsif ($line =~ /^\sX\d+.?\d*\sY\d+.?\d*$/){
+	outputMoveLine("$moveType$line");
+    }
+    #dual YZ moves
+    elsif ($line =~ /^\sY\d+.?\d*\sZ\d+.?\d*$/){
 	outputMoveLine("$moveType$line");
     }
     #single XY (Z but hasn't been seen) moves
