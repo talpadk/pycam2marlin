@@ -44,16 +44,8 @@ while (<STDIN>) {
 	$feedSpeed = $1;
 	print ";Feedspeed ($feedSpeed) in line: $line";
     }
-    #dual XY moves
-    elsif ($line =~ /^\sX\d+.?\d*\sY\d+.?\d*$/){
-	outputMoveLine("$moveType$line");
-    }
-    #dual YZ moves
-    elsif ($line =~ /^\sY\d+.?\d*\sZ\d+.?\d*$/){
-	outputMoveLine("$moveType$line");
-    }
-    #single XY (Z but hasn't been seen) moves
-    elsif ($line =~ /^\s[XYZ]\d+.?\d*$/){
+    #Move missng a G type 
+    elsif ($line =~ /^\s*[XYZ]\d+.?\d*/){
 	outputMoveLine("$moveType$line");
     }
     #comment line
