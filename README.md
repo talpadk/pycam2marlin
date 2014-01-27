@@ -11,9 +11,8 @@ A script to convert the compact G-code written by PyCAM into a less compact vers
 
 ### Known features
 
-* Currently only tested on engraving output.
-* Does not handle feed rates from the input file. **Warning the output will run you machine at the max speed you have configured marlin for!**
-* Turns every "compact" move into a G1 move. While this is safe in the future when feed rates are obeyed for G1 moves using G0 for rapid moves will speed up the program execution.
+* Hardcoded feedrates for G0 uncoordinated "rapid" moves, the actual feed rate should be limited by your marlin configuration
+* The planed reduced plunge rate enhancement of the pycam output is yet to be implemented.
 
 ### Usage 
 Just send the script the input code on standard in, the script writes to standard out, eg.:
